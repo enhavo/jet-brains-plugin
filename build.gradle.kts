@@ -1,17 +1,14 @@
 plugins {
-    id("org.jetbrains.intellij") version "1.16.1"
-    kotlin("jvm")
+    id("java")
+    id("org.jetbrains.kotlin.jvm") version "1.9.21"
+    id("org.jetbrains.intellij") version "1.17.3"
 }
 
-group = "de.jonihoffi"
-version = "1.1.0"
+group = "de.jonihoffi.plugins"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
-    implementation(kotlin("stdlib-jdk8"))
 }
 
 intellij {
@@ -20,18 +17,16 @@ intellij {
     plugins.set(listOf("org.jetbrains.plugins.yaml"))
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-}
-
-tasks.withType<JavaCompile> {
-    sourceCompatibility = "17"
-    targetCompatibility = "17"
-}
-
 tasks {
+    // Set the JVM compatibility versions
+    withType<JavaCompile> {
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
+    }
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions.jvmTarget = "17"
+    }
+
     patchPluginXml {
         sinceBuild.set("241")
         untilBuild.set("241.*")
