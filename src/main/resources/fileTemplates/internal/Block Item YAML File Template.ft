@@ -1,0 +1,34 @@
+Block/${NAME}Block:
+    label: '${NAME}'
+    groups: [ ${GROUPS} ]
+    block_type: true
+
+    properties:
+        headline:
+            template: headline
+        items:
+            template: items
+            type_options:
+                singular: item
+                entry_class: ${NAME}BlockItem
+            relation:
+                target_entity: ${NAME}BlockItem::class
+                mapped_by: ${CAMELCASE}
+            form:
+                options:
+                    entry_type: ${NAME}BlockItemType::class
+
+    classes:
+        Block/${NAME}BlockItem:
+            properties:
+                id:
+                    template: primary-key
+                ${CAMELCASE}:
+                    type: ${NAME}Block
+                    nullable: true
+                    relation:
+                        type: ManyToOne
+                        target_entity: ${NAME}Block::class
+                        inversed_by: items
+                position:
+                    template: PositionType

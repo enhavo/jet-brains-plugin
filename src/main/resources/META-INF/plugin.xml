@@ -1,0 +1,25 @@
+<idea-plugin>
+    <id>de.jonihoffi.plugins.demo</id>
+    <name>Enhavo Template</name>
+    <version>1.1.0</version>
+    <vendor email="mail@jonas.technology">Jonas</vendor>
+
+    <depends>com.intellij.modules.lang</depends>
+    <depends>org.jetbrains.plugins.yaml</depends>
+
+    <description>Ein plugin welches autovervollständigung zum enhavo blockmaker hinzufügt</description>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <completion.contributor language="yaml" implementationClass="de.jonihoffi.plugins.demo.TemplateCompletionContributor"/>
+    </extensions>
+
+    <actions>
+        <action id="de.jonihoffi.plugins.demo.NewBlockYamlFileAction"
+                class="de.jonihoffi.plugins.demo.NewBlockYamlFileAction"
+                text="New Block YAML File"
+                description="Creates a new block YAML file">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="before" />
+            <add-to-group group-id="NewGroup" anchor="first" />
+        </action>
+    </actions>
+</idea-plugin>

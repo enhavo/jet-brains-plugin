@@ -1,0 +1,9 @@
+# Block YAML Template
+Block/${NAME}Block:
+    label: '${NAME}'
+    groups: [ ${GROUPS} ]
+    block_type: true
+
+    properties:
+        headline:
+            template: headline
