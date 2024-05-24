@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 )
 public final class AppSettingsState implements PersistentStateComponent<AppSettingsState> {
 
-    public String templatePath = "/config/block/templates";
+    public String templatePath = "/config/block/templates/";
 
     public static AppSettingsState getInstance() {
         return ApplicationManager.getApplication().getService(AppSettingsState.class);

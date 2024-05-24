@@ -11,20 +11,20 @@
     <description>This plugin seamlessly integrates with PhpStorm to provide comprehensive autocomplete functionality specifically tailored for the Enhavo BlockMaker. By incorporating intelligent code completion, it enhances the development experience by offering suggestions for block templates, attributes, and configurations directly within your YAML files.</description>
 
     <extensions defaultExtensionNs="com.intellij">
-        <completion.contributor language="yaml" implementationClass="de.jonihoffi.plugins.enhavo.TemplateCompletionContributor"/>
+        <completion.contributor language="yaml" implementationClass="de.jonihoffi.plugins.enhavo.extensions.TemplateCompletionContributor"/>
 
-        <applicationService
-                serviceImplementation="de.jonihoffi.plugins.enhavo.settings.AppSettingsState"/>
+        <applicationService serviceImplementation="de.jonihoffi.plugins.enhavo.settings.AppSettingsState"/>
 
         <applicationConfigurable
                 parentId="tools"
                 instance="de.jonihoffi.plugins.enhavo.settings.AppSettingsConfigurable"
                 id="de.jonihoffi.plugins.enhavo.settings.AppSettingsConfigurable"
-                displayName="Enhavo Settings"/>
+                displayName="Enhavo Settings"
+        />
     </extensions>
 
     <actions>
-        <action id="de.jonihoffi.plugins.enhavo.NewBlockYamlFileAction" class="de.jonihoffi.plugins.enhavo.NewBlockYamlFileAction">
+        <action id="de.jonihoffi.plugins.enhavo.actions.NewBlockYamlFileAction" class="de.jonihoffi.plugins.enhavo.actions.NewBlockYamlFileAction">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="before" relative-to-action="NewGroup"/>
             <add-to-group group-id="NewGroup" anchor="first" />
         </action>

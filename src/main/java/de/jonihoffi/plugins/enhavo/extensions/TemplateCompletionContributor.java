@@ -1,4 +1,4 @@
-package de.jonihoffi.plugins.enhavo;
+package de.jonihoffi.plugins.enhavo.extensions;
 
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;

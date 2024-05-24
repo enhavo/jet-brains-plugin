@@ -1,4 +1,4 @@
-package de.jonihoffi.plugins.enhavo.dialog;
+package de.jonihoffi.plugins.enhavo.dialogs;
 
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.components.JBCheckBox;

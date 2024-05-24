@@ -1,4 +1,4 @@
-package de.jonihoffi.plugins.enhavo;
+package de.jonihoffi.plugins.enhavo.actions;
 
 import com.intellij.ide.IdeView;
 import com.intellij.ide.fileTemplates.FileTemplateManager;
@@ -10,7 +10,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
-import de.jonihoffi.plugins.enhavo.dialog.NewBlockYamlFileDialog;
+import de.jonihoffi.plugins.enhavo.dialogs.NewBlockYamlFileDialog;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Properties;

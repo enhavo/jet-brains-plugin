@@ -1,4 +1,3 @@
-# Block YAML Template
 Block/${NAME}Block:
     label: '${NAME}'
     groups: [ ${GROUPS} ]

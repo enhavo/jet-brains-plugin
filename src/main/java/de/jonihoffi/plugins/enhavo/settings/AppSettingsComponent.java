@@ -13,7 +13,7 @@ import javax.swing.*;
 public class AppSettingsComponent {
 
     private final JPanel myMainPanel;
-    private final JBTextField myTemplatePath = new JBTextField("/config/block/templates");
+    private final JBTextField myTemplatePath = new JBTextField("/config/block/templates/");
 
     public AppSettingsComponent() {
         myMainPanel = FormBuilder.createFormBuilder()
