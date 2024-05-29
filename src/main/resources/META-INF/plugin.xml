@@ -14,6 +14,7 @@
         <completion.contributor language="yaml" implementationClass="de.jonihoffi.plugins.enhavo.extensions.TemplateCompletionContributor"/>
 
         <applicationService serviceImplementation="de.jonihoffi.plugins.enhavo.settings.AppSettingsState"/>
+        <codeInsight.lineMarkerProvider implementationClass="de.jonihoffi.plugins.enhavo.extensions.YamlBlockLineMarkerProvider" language="yaml"/>
 
         <applicationConfigurable
                 parentId="tools"
@@ -21,6 +22,8 @@
                 id="de.jonihoffi.plugins.enhavo.settings.AppSettingsConfigurable"
                 displayName="Enhavo Settings"
         />
+
+        <toolWindow id="Blocks" anchor="right" factoryClass="de.jonihoffi.plugins.enhavo.extensions.BlockToolWindowFactory" />
     </extensions>
 
     <actions>

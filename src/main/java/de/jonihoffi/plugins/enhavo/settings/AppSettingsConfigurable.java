@@ -37,19 +37,22 @@ final class AppSettingsConfigurable implements Configurable {
     @Override
     public boolean isModified() {
         AppSettingsState settings = AppSettingsState.getInstance();
-        return !mySettingsComponent.getTemplatePathText().equals(settings.templatePath);
+        return !mySettingsComponent.getTemplatePathText().equals(settings.templatePath) ||
+                !mySettingsComponent.getBlockPathText().equals(settings.blockPath);
     }
 
     @Override
     public void apply() {
         AppSettingsState settings = AppSettingsState.getInstance();
         settings.templatePath = mySettingsComponent.getTemplatePathText();
+        settings.blockPath = mySettingsComponent.getBlockPathText();
     }
 
     @Override
     public void reset() {
         AppSettingsState settings = AppSettingsState.getInstance();
         mySettingsComponent.setTemplatePathText(settings.templatePath);
+        mySettingsComponent.setBlockPathText(settings.blockPath);
     }
 
     @Override
