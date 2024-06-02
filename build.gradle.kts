@@ -5,15 +5,15 @@ plugins {
 }
 
 group = "de.jonihoffi.plugins"
-version = "0.0.1"
+version = "0.0.2"
 
 repositories {
     mavenCentral()
 }
 
 intellij {
-    version.set("2024.1.1")
-    type.set("PS") // IC = IntelliJ IDEA Community Edition, IU = IntelliJ IDEA Ultimate Edition
+    version.set("2024.1")
+    type.set("PS")
     plugins.set(listOf("org.jetbrains.plugins.yaml"))
 }
 
@@ -26,10 +26,5 @@ tasks {
     }
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions.jvmTarget = "17"
-    }
-
-    patchPluginXml {
-        sinceBuild.set("241")
-        untilBuild.set("241.*")
     }
 }

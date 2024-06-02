@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>de.jonihoffi.plugins.enhavo</id>
     <name>Enhavo Helper</name>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <vendor email="mail@jonas.technology">Jonas</vendor>
 
     <depends>com.intellij.modules.lang</depends>

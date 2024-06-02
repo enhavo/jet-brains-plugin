@@ -12,12 +12,9 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.execution.ui.RunContentManager;
 import com.intellij.execution.ui.RunnerLayoutUi;
 import com.intellij.icons.AllIcons;
-import com.intellij.ide.X.x.T;
-import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.editor.markup.GutterIconRenderer;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
 import com.intellij.terminal.TerminalExecutionConsole;
@@ -28,9 +25,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class YamlBlockLineMarkerProvider implements LineMarkerProvider {
 
