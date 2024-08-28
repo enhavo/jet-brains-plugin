@@ -47,7 +47,7 @@ public class YamlBlockLineMarkerProvider implements LineMarkerProvider {
                     keyElement,
                     keyElement.getTextRange(),
                     AllIcons.Actions.Execute,
-                    psiElement -> "Execute command", // Tooltip provider
+                    psiElement -> "Execute Block", // Tooltip provider
                     new GutterIconNavigationHandler<>() {
                         @Override
                         public void navigate(MouseEvent e, PsiElement elt) {
@@ -66,7 +66,7 @@ public class YamlBlockLineMarkerProvider implements LineMarkerProvider {
 
     private void executeCommand(String blockPath, String fileName, Project project) {
         try {
-            String command = "bin/console make:enhavo:block -op " + blockPath + fileName;
+            String command = "bin/console make:enhavo:block -op " + blockPath + "/" + fileName;
             GeneralCommandLine commandLine = new GeneralCommandLine("sh", "-c", command);
             commandLine.setWorkDirectory(project.getBasePath());
 

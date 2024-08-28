@@ -27,7 +27,7 @@ public class TemplateCompletionContributor extends CompletionContributor {
                                                   @NotNull ProcessingContext context,
                                                   @NotNull CompletionResultSet resultSet) {
                         Project project = parameters.getPosition().getProject();
-                        String templateDir = project.getBasePath() + AppSettingsState.getInstance().templatePath;
+                        String templateDir = project.getBasePath() + "/" + AppSettingsState.getInstance().templatePath;
                         VirtualFile baseDir = LocalFileSystem.getInstance().findFileByPath(templateDir);
                         if (baseDir != null && baseDir.isDirectory()) {
                             for (VirtualFile file : baseDir.getChildren()) {

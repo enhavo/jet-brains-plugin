@@ -5,14 +5,14 @@ plugins {
 }
 
 group = "de.jonihoffi.plugins"
-version = "0.0.2"
+version = "0.0.4"
 
 repositories {
     mavenCentral()
 }
 
 intellij {
-    version.set("2024.1")
+    version.set("2024.2")
     type.set("PS")
     plugins.set(listOf("org.jetbrains.plugins.yaml"))
 }
