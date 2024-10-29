@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -6,12 +7,22 @@ use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: REPOSITORY::class)]
-#[ORM\Table(name: '${TABLE_NAME}')]
-class ${NAME} implements ResourceInterface
+#[ORM\Table(name: 'app_location')]
+class Location implements ResourceInterface
 {
   #[ORM\Id]
   #[ORM\GeneratedValue]
   #[ORM\Column]
   #[Groups(['endpoint.block'])]
-  private ?int $id = null;
+  private ?int \$id = null;
+
+  public function getId(): ?int
+  {
+    return \$this->id;
+  }
+
+  public function setId(?int \$id): void
+  {
+    \$this->id = \$id;
+  }
 }

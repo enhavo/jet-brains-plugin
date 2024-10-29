@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>de.jonihoffi.plugins.enhavo</id>
     <name>Enhavo Helper</name>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
     <vendor email="mail@jonas.technology">Jonas</vendor>
 
     <depends>com.intellij.modules.lang</depends>
@@ -9,7 +9,7 @@
     <depends>com.intellij.modules.platform</depends>
 
     <description>This plugin seamlessly integrates with PhpStorm to provide comprehensive autocomplete functionality specifically tailored for the Enhavo BlockMaker. By incorporating intelligent code completion, it enhances the development experience by offering suggestions for block templates, attributes, and configurations directly within your YAML files.</description>
-    <change-notes>Add migrations tab to the right side</change-notes>
+    <change-notes>Add new entity dialog to create a new entity</change-notes>
 
     <extensions defaultExtensionNs="com.intellij">
         <completion.contributor language="yaml" implementationClass="de.jonihoffi.plugins.enhavo.extensions.TemplateCompletionContributor"/>
