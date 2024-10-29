@@ -1,0 +1,17 @@
+<?php
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Sylius\Resource\Model\ResourceInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+#[ORM\Entity(repositoryClass: REPOSITORY::class)]
+#[ORM\Table(name: '${TABLE_NAME}')]
+class ${NAME} implements ResourceInterface
+{
+  #[ORM\Id]
+  #[ORM\GeneratedValue]
+  #[ORM\Column]
+  #[Groups(['endpoint.block'])]
+  private ?int $id = null;
+}

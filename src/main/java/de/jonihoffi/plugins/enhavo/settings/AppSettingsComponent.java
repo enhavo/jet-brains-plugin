@@ -13,15 +13,17 @@ import javax.swing.*;
 public class AppSettingsComponent {
 
     private final JPanel myMainPanel;
-    private final JBTextField myTemplatePath = new JBTextField("config/block/templates/");
-    private final JBTextField myBlockPath = new JBTextField("config/block/");
-    private final JBTextField myEntityPath = new JBTextField("src/Entity/");
+    private final JBTextField myTemplatePath = new JBTextField("config/block/templates");
+    private final JBTextField myBlockPath = new JBTextField("config/block");
+    private final JBTextField myEntityPath = new JBTextField("src/Entity");
+    private final JBTextField myMigrationsPath = new JBTextField("src/Migrations");
 
     public AppSettingsComponent() {
         myMainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent(new JBLabel("Enter template path: "), myTemplatePath, 1, false)
                 .addLabeledComponent(new JBLabel("Enter block path: "), myBlockPath, 1, false)
                 .addLabeledComponent(new JBLabel("Enter entity path: "), myEntityPath, 1, false)
+                .addLabeledComponent(new JBLabel("Enter migrations path: "), myMigrationsPath, 1, false)
                 .addComponentFillVertically(new JPanel(), 0)
                 .getPanel();
     }
@@ -59,5 +61,14 @@ public class AppSettingsComponent {
 
     public void setEntityPathText(@NotNull String newText) {
         myEntityPath.setText(newText);
+    }
+
+    @NotNull
+    public String getMigrationsPathText() {
+        return myMigrationsPath.getText();
+    }
+
+    public void setMigrationsPathText(@NotNull String newText) {
+        myMigrationsPath.setText(newText);
     }
 }

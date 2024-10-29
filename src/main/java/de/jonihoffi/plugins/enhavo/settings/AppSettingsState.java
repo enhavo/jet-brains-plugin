@@ -21,6 +21,7 @@ public final class AppSettingsState implements PersistentStateComponent<AppSetti
     public String templatePath = "config/block/templates";
     public String blockPath = "config/block";
     public String entityPath = "src/Entity";
+    public String migrationsPath = "src/Migrations";
 
     public static AppSettingsState getInstance() {
         return ApplicationManager.getApplication().getService(AppSettingsState.class);

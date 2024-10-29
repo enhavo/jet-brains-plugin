@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>de.jonihoffi.plugins.enhavo</id>
     <name>Enhavo Helper</name>
-    <version>0.0.4</version>
+    <version>0.0.6</version>
     <vendor email="mail@jonas.technology">Jonas</vendor>
 
     <depends>com.intellij.modules.lang</depends>
@@ -9,7 +9,7 @@
     <depends>com.intellij.modules.platform</depends>
 
     <description>This plugin seamlessly integrates with PhpStorm to provide comprehensive autocomplete functionality specifically tailored for the Enhavo BlockMaker. By incorporating intelligent code completion, it enhances the development experience by offering suggestions for block templates, attributes, and configurations directly within your YAML files.</description>
-    <change-notes>Fix settings so that all file paths can be entered in the same format.</change-notes>
+    <change-notes>Add migrations tab to the right side</change-notes>
 
     <extensions defaultExtensionNs="com.intellij">
         <completion.contributor language="yaml" implementationClass="de.jonihoffi.plugins.enhavo.extensions.TemplateCompletionContributor"/>
@@ -26,10 +26,15 @@
         />
 
         <toolWindow id="Blocks" anchor="right" factoryClass="de.jonihoffi.plugins.enhavo.extensions.BlockToolWindowFactory" />
+        <toolWindow id="Migrations" anchor="right" factoryClass="de.jonihoffi.plugins.enhavo.extensions.MigrationsToolWindowFactory" />
     </extensions>
 
     <actions>
         <action id="de.jonihoffi.plugins.enhavo.actions.NewBlockYamlFileAction" class="de.jonihoffi.plugins.enhavo.actions.NewBlockYamlFileAction">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="before" relative-to-action="NewGroup"/>
+            <add-to-group group-id="NewGroup" anchor="first" />
+        </action>
+        <action id="de.jonihoffi.plugins.enhavo.actions.NewEntityAction" class="de.jonihoffi.plugins.enhavo.actions.NewEntityAction">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="before" relative-to-action="NewGroup"/>
             <add-to-group group-id="NewGroup" anchor="first" />
         </action>
