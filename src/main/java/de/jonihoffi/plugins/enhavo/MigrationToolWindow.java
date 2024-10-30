@@ -13,8 +13,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
-import de.jonihoffi.plugins.enhavo.settings.AppSettingsState;
 import org.jetbrains.annotations.NotNull;
+import org.yaml.snakeyaml.Yaml;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -22,16 +22,26 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Map;
 import java.util.Objects;
 
 public class MigrationToolWindow {
     private final Project project;
     private final JPanel contentPanel;
     private DefaultTreeModel treeModel;
+    private String migrationsPath;
 
     public MigrationToolWindow(Project project) {
         this.project = project;
         this.contentPanel = new SimpleToolWindowPanel(true);
+        this.migrationsPath = loadMigrationsPath();
         setupUI();
         reloadMigrations();
     }
@@ -72,9 +82,28 @@ public class MigrationToolWindow {
     }
 
     private void addFilesToTree(File dir, DefaultMutableTreeNode node) {
-        for (File file : Objects.requireNonNull(dir.listFiles((d, name) -> name.endsWith(".php")))) {
-            String fileNameWithoutExtension = file.getName().replace(".php", "");
-            node.add(new DefaultMutableTreeNode(fileNameWithoutExtension));
+        File[] phpFiles = dir.listFiles((d, name) -> name.endsWith(".php"));
+        if (phpFiles != null) {
+            // Sort files by date in descending order (newest first)
+            Arrays.sort(phpFiles, Comparator.comparing(this::extractDateFromFilename, Comparator.nullsLast(Date::compareTo)).reversed());
+
+            for (File file : phpFiles) {
+                String fileNameWithoutExtension = file.getName().replace(".php", "");
+                node.add(new DefaultMutableTreeNode(fileNameWithoutExtension));
+            }
+        }
+    }
+
+    private Date extractDateFromFilename(File file) {
+        String fileName = file.getName().replace(".php", "");
+        String dateString = fileName.replaceAll("\\D", "");
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+            return dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -82,7 +111,7 @@ public class MigrationToolWindow {
         new Task.Backgroundable(project, "Opening Migration File") {
             @Override
             public void run(@NotNull ProgressIndicator indicator) {
-                String filePath = project.getBasePath() + "/" + AppSettingsState.getInstance().migrationsPath + "/" + migrationName + ".php";
+                String filePath = migrationsPath + "/" + migrationName + ".php";
                 VirtualFile virtualFile = ReadAction.compute(() -> VirtualFileManager.getInstance().findFileByUrl("file://" + filePath));
                 if (virtualFile != null) {
                     ApplicationManager.getApplication().invokeLater(() -> {
@@ -100,11 +129,26 @@ public class MigrationToolWindow {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) treeModel.getRoot();
         root.removeAllChildren();
 
-        File migrationsDir = new File(project.getBasePath() + "/" + AppSettingsState.getInstance().migrationsPath);
+        File migrationsDir = new File(migrationsPath);
         if (migrationsDir.exists() && migrationsDir.isDirectory()) {
             addFilesToTree(migrationsDir, root);
         }
 
         treeModel.reload();
+    }
+
+    private String loadMigrationsPath() {
+        String yamlPath = project.getBasePath() + "/config/packages/doctrine_migrations.yaml";
+        Yaml yaml = new Yaml();
+        try (FileInputStream inputStream = new FileInputStream(yamlPath)) {
+            Map<String, Object> config = yaml.load(inputStream);
+            Map<String, Object> doctrineMigrations = (Map<String, Object>) config.get("doctrine_migrations");
+            Map<String, String> migrationsPaths = (Map<String, String>) doctrineMigrations.get("migrations_paths");
+            String path = migrationsPaths.get("App\\Migration");
+            return path.replace("%kernel.project_dir%", project.getBasePath());
+        } catch (IOException | ClassCastException e) {
+            e.printStackTrace();
+            return project.getBasePath() + "/migrations"; // Fallback path
+        }
     }
 }
