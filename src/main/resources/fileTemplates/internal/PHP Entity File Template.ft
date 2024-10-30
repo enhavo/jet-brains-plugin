@@ -7,8 +7,8 @@ use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: REPOSITORY::class)]
-#[ORM\Table(name: 'app_location')]
-class Location implements ResourceInterface
+#[ORM\Table(name: '${TABLE_NAME}')]
+class ${NAME} implements ResourceInterface
 {
   #[ORM\Id]
   #[ORM\GeneratedValue]
