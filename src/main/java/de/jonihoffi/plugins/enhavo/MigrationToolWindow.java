@@ -144,11 +144,16 @@ public class MigrationToolWindow {
             Map<String, Object> config = yaml.load(inputStream);
             Map<String, Object> doctrineMigrations = (Map<String, Object>) config.get("doctrine_migrations");
             Map<String, String> migrationsPaths = (Map<String, String>) doctrineMigrations.get("migrations_paths");
-            String path = migrationsPaths.get("App\\Migration");
-            return path.replace("%kernel.project_dir%", project.getBasePath());
+            if (migrationsPaths == null) {
+                Map<String, String> migrations = (Map<String, String>) config.get("doctrine_migrations");
+                String path = migrations.get("dir_name");
+                return path.replace("%kernel.project_dir%", project.getBasePath());
+            } else {
+                String path = migrationsPaths.get("App\\Migration");
+                return path.replace("%kernel.project_dir%", project.getBasePath());
+            }
         } catch (IOException | ClassCastException e) {
-            e.printStackTrace();
-            return project.getBasePath() + "/migrations"; // Fallback path
+            return project.getBasePath() + "/src/Migrations";
         }
     }
 }
