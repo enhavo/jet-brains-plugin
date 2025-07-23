@@ -36,7 +36,7 @@ public class MigrationToolWindow {
     private final Project project;
     private final JPanel contentPanel;
     private DefaultTreeModel treeModel;
-    private String migrationsPath;
+    private final String migrationsPath;
 
     public MigrationToolWindow(Project project) {
         this.project = project;
